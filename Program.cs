@@ -137,6 +137,69 @@ namespace aoc2020
         }
     }
 
+    class Day3
+    {
+        public static int part1(int slp_right, int slp_down) 
+        {
+            string filePath = "./input_Day3.txt";
+            List<string> lines = File.ReadAllLines(filePath).ToList();
+
+            int res = 0;
+
+            int currIndex = 0;
+
+            for (int i = 0; i < lines.Count - slp_down; i += slp_down)
+            {
+                // Getting the next line
+                string line = lines[ i + slp_down ];
+
+                // Incrementing the current index
+                currIndex += slp_right;
+
+                // Checking if the index gets out of bounds
+                if (currIndex >= line.Length)
+                {
+                    // Resetting the index
+                    currIndex -= line.Length;
+                }
+                // Getting the current char
+                char currChar = line[currIndex];
+                
+                // Checking if its a tree
+                if (currChar == '#') res++;
+
+            }
+
+            return res;
+        }
+
+        public static Int64 part2()
+        {
+                        
+            Console.WriteLine($"(1, 1) = {Day3.part1(1, 1)}");
+            Console.WriteLine($"(3, 1) = {Day3.part1(3, 1)}");
+            Console.WriteLine($"(5, 1) = {Day3.part1(5, 1)}");
+            Console.WriteLine($"(7, 1) = {Day3.part1(7, 1)}");
+            Console.WriteLine($"(1, 2) = {Day3.part1(1, 2)}");
+
+            Int64 res = (Int64)(Day3.part1(1, 1)) *
+                        (Int64)(Day3.part1(3, 1)) *
+                        (Int64)(Day3.part1(5, 1)) *
+                        (Int64)(Day3.part1(7, 1)) *
+                        (Int64)(Day3.part1(1, 2));
+
+            return res;
+        }
+
+        public static void display()
+        {
+            Console.WriteLine("\n******************** DAY 3 ********************");
+            Console.WriteLine("Part1 = " + Day3.part1(3, 1));
+            Console.WriteLine("Part2 = " + Day3.part2());
+            Console.WriteLine("***********************************************");
+        }
+    }
+
 
     class Program
     {
@@ -144,6 +207,7 @@ namespace aoc2020
         {
             Day1.display();
             Day2.display();
+            Day3.display();
         }
     }
 
